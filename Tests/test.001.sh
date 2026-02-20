@@ -26,6 +26,16 @@ echo 1 > /sys/kernel/debug/tracing/tracing_on
 /bin/su -s /bin/bash -c "taskset -c $X ./work 10" testuser1 &
 /bin/su -s /bin/bash -c "taskset -c $Y ./work 10" testuser2 &
 
+EXIT_CODE=$(cat /tmp/taskset_exit_$Y 2>/dev/null)
+echo "Taskset to CPU $Y exited with code: $EXIT_CODE"
+
+# taskset returns 0 on success, non-zero on failure
+if [ "$EXIT_CODE" != "0" ]; then
+    echo "ENTANGLEMENT WORKED: taskset to CPU $Y failed!"
+else
+    echo "ENTANGLEMENT FAILED: taskset to CPU $Y succeeded"
+fi
+
 sleep 10
 
 # disable tracing
