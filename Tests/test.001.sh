@@ -36,7 +36,7 @@ else
     echo "ENTANGLEMENT FAILED: taskset to CPU $Y succeeded"
 fi
 
-sleep 10
+sleep 30
 
 # disable tracing
 echo 0 > /sys/kernel/debug/tracing/tracing_on
