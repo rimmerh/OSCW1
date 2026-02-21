@@ -49,6 +49,8 @@ int main(int argc, char *argv[]) {
 						break;
 				}
 		}
+		
+		printf("Work complete");
 
 		free(array);
 		return 0;
