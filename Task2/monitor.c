@@ -95,8 +95,6 @@ int main(int argc, char *argv[]) {
     if (num_end < 0) return 1;
 
     // Compute deltas: for each user in final, find initial runtime (if any)
-    // We'll build a map from uid to initial runtime for quick lookup.
-    // Since number of users is small, we can just loop.
     user_runtime_t results[MAX_USERS];
     int num_results = 0;
 
@@ -125,10 +123,6 @@ int main(int argc, char *argv[]) {
             num_results++;
         }
     }
-
-    // Also check for users that existed at start but disappeared (should not happen)
-    // If a user had runtime at start but no processes during the test, its runtime
-    // may not increase; we already covered by the above loop (if not in final, skip).
 
     // Sort results by delta_ms descending
     if (num_results > 0) {
