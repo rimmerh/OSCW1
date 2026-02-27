@@ -1,0 +1,74 @@
+=== Per-User Fairness Test (pinned to CPU 0) ===
+Log file: per_user_test_20260227_171749.log
+Debugfs ready.
+Using weights file: /sys/kernel/debug/user_runtime/user_weights
+User test_user1 UID=1019, test_user2 UID=1020
+
+[0;32m--- Test Phase: Single user (test_user1, 1 task) ---[0m
+  test_user1 before: runtime=176484579462 ns, factor=370
+  test_user2 before: runtime=247021458669 ns, factor=264
+Starting 1 CPU stressor(s) under test_user1 for 30s (pinned to CPU 0)
+  Task weights shortly after start:
+    test_user1 initial task weights: 5 5
+    test_user2 initial: no stress processes
+Waiting 30s for workloads to complete...
+  test_user1 after: runtime=206536877871 ns, factor=316
+  test_user2 after: runtime=247021458669 ns, factor=264
+  Task weights after completion:
+    test_user1 final: no stress processes
+    test_user2 final: no stress processes
+  Delta: test_user1 = 30052298409 ns (30052 ms), test_user2 = 0 ns (0 ms)
+  CPU time share: test_user1 = 100%, test_user2 = 0%
+
+[0;32m--- Test Phase: Two users, equal tasks (1 each) ---[0m
+  test_user1 before: runtime=206536877871 ns, factor=316
+  test_user2 before: runtime=247021458669 ns, factor=264
+Starting 1 CPU stressor(s) under test_user1 for 30s (pinned to CPU 0)
+Starting 1 CPU stressor(s) under test_user2 for 30s (pinned to CPU 0)
+  Task weights shortly after start:
+    test_user1 initial task weights: 4 4
+    test_user2 initial task weights: 4 4
+Waiting 30s for workloads to complete...
+  test_user1 after: runtime=222507243072 ns, factor=293
+  test_user2 after: runtime=261294575234 ns, factor=250
+  Task weights after completion:
+    test_user1 final: no stress processes
+    test_user2 final: no stress processes
+  Delta: test_user1 = 15970365201 ns (15970 ms), test_user2 = 14273116565 ns (14273 ms)
+  CPU time share: test_user1 = 52%, test_user2 = 47%
+
+[0;32m--- Test Phase: Two users, unequal tasks (test_user1=2, test_user2=1) ---[0m
+  test_user1 before: runtime=222507243072 ns, factor=293
+  test_user2 before: runtime=261294575234 ns, factor=250
+Starting 2 CPU stressor(s) under test_user1 for 30s (pinned to CPU 0)
+Starting 1 CPU stressor(s) under test_user2 for 30s (pinned to CPU 0)
+  Task weights shortly after start:
+    test_user1 initial task weights: 4 4 4
+    test_user2 initial task weights: 3 3
+Waiting 30s for workloads to complete...
+  test_user1 after: runtime=244382740482 ns, factor=267
+  test_user2 after: runtime=269615433839 ns, factor=242
+  Task weights after completion:
+    test_user1 final: no stress processes
+    test_user2 final: no stress processes
+  Delta: test_user1 = 21875497410 ns (21875 ms), test_user2 = 8320858605 ns (8320 ms)
+  CPU time share: test_user1 = 72%, test_user2 = 27%
+
+[0;32m--- Test Phase: Preload test_user1, then run test_user2 ---[0m
+Preloading test_user1 with 1 CPU stressor for 60s (pinned to CPU 0)
+  Before second phase:
+    test_user1: runtime=249236122941 ns, factor=262
+    test_user2: runtime=269615433839 ns, factor=242
+  Task weights before second phase:
+    test_user1 pre task weights: 4 4
+    test_user2 pre: no stress processes
+Starting 1 CPU stressor(s) under test_user2 for 30s (pinned to CPU 0)
+  After second phase:
+    test_user1: runtime=266158395431 ns, factor=245
+    test_user2: runtime=283969348598 ns, factor=230
+  Task weights after second phase:
+    test_user1 post task weights: 4 3
+    test_user2 post: no stress processes
+  Delta during second phase: test_user1 = 16922272490 ns (16922 ms), test_user2 = 14353914759 ns (14353 ms)
+  CPU time share during second phase: test_user1 = 54%, test_user2 = 45%
+Cleaning up: killing any leftover stress processes...

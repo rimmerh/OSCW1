@@ -30,6 +30,32 @@ sudo -u testuser1 ./cpu_spam &
 PID1=$!
 echo "testuser1 process: PID $PID1"
 
+# (2B) Second testuser1 process
+sudo -u testuser1 ./cpu_spam &
+PID1=$!
+echo "testuser1 second process: PID $PID1"
+
+# (2B) Second testuser1 process
+sudo -u testuser1 ./cpu_spam &
+PID1=$!
+echo "testuser1 second process: PID $PID1"
+
+# (2B) Second testuser1 process
+sudo -u testuser1 ./cpu_spam &
+PID1=$!
+echo "testuser1 second process: PID $PID1"
+
+# (2B) Second testuser1 process
+sudo -u testuser1 ./cpu_spam &
+PID1=$!
+echo "testuser1 second process: PID $PID1"
+
+# (2B) Second testuser1 process
+sudo -u testuser1 ./cpu_spam &
+PID1=$!
+echo "testuser1 second process: PID $PID1"
+
+
 sudo -u testuser2 ./cpu_spam &
 PID2=$!
 echo "testuser2 process: PID $PID2"

@@ -1,0 +1,39 @@
+=== Per-User Fairness Multi-User Test ===
+Test duration: 10s, pinned to CPU 0
+Task counts per user: 1 2 1 0
+Log file: per_user_test_20260227_172026.log
+User test_user1 UID=1019 tasks=1
+User test_user2 UID=1020 tasks=2
+User test_user3 UID=1021 tasks=1
+Resetting user runtimes (if reset files exist)...
+[1;33mWARNING: Reset file for UID 1021 not found; runtime may not be zero.[0m
+[1;33mWARNING: Reset file for UID 1020 not found; runtime may not be zero.[0m
+[1;33mWARNING: Reset file for UID 1019 not found; runtime may not be zero.[0m
+Initial runtimes:
+  test_user3: 176493038885 ns
+  test_user2: 283969348598 ns
+  test_user1: 281475803506 ns
+Launching tasks...
+  Starting 1 stressor(s) under test_user3
+  Starting 2 stressor(s) under test_user2
+  Starting 1 stressor(s) under test_user1
+Waiting 10s for workloads to complete...
+Final runtimes:
+  test_user3: 180149229943 ns
+  test_user2: 288361249239 ns
+  test_user1: 283741727434 ns
+Delta test_user3: 3656191058 ns (3656 ms)
+Delta test_user2: 4391900641 ns (4391 ms)
+Delta test_user1: 2265923928 ns (2265 ms)
+
+[0;32mCPU time shares (based on total delta):[0m
+  test_user3 = 35%
+  test_user2 = 42%
+  test_user1 = 21%
+
+Expected shares (if all users had equal weight):
+  test_user3 (tasks=1) = 25%
+  test_user2 (tasks=2) = 50%
+  test_user1 (tasks=1) = 25%
+
+Test completed. Log saved to per_user_test_20260227_172026.log
